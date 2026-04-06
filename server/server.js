@@ -63,7 +63,7 @@ app.post('/api/chat', async (req, res) => {
     message,
     chatId,
     userId = 'default-user',
-    provider: providerName = 'claude',  // Per-request provider selection
+    provider: providerName = 'groq',  // Per-request provider selection
     model = null  // Per-request model selection
   } = req.body;
 
@@ -175,7 +175,7 @@ app.post('/api/chat', async (req, res) => {
 
 // Abort endpoint to stop active queries
 app.post('/api/abort', (req, res) => {
-  const { chatId, provider: providerName = 'claude' } = req.body;
+  const { chatId, provider: providerName = 'groq' } = req.body;
 
   if (!chatId) {
     return res.status(400).json({ error: 'chatId is required' });

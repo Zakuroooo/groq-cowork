@@ -35,8 +35,8 @@ let isFirstMessage = true;
 let todos = [];
 let toolCalls = [];
 let attachedFiles = [];
-let selectedProvider = 'claude';
-let selectedModel = 'claude-sonnet-4-5-20250514';
+let selectedProvider = 'groq';
+let selectedModel = 'llama-3.3-70b-versatile';
 let thinkingMode = 'normal'; // 'normal' or 'extended'
 let isWaitingForResponse = false;
 
@@ -54,7 +54,7 @@ const providerModels = {
     { value: 'claude-sonnet-4-5-20250514', label: 'Sonnet 4.5', desc: 'Best for everyday tasks', default: true },
     { value: 'claude-haiku-4-5-20250514', label: 'Haiku 4.5', desc: 'Fastest for quick answers' }
   ],
-  opencode: [
+  groq: [    { value: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B', desc: 'Best free model', default: true },    { value: 'llama-3.1-8b-instant', label: 'Llama 3.1 8B', desc: 'Fastest responses' },    { value: 'mixtral-8x7b-32768', label: 'Mixtral 8x7B', desc: 'Great for coding' }  ],  opencode: [
     // Opencode Zen (Free)
     { value: 'opencode/big-pickle', label: 'Big Pickle', desc: 'Reasoning model', default: true },
     { value: 'opencode/gpt-5-nano', label: 'GPT-5 Nano', desc: 'OpenAI reasoning' },
@@ -173,7 +173,7 @@ function loadAllChats() {
 
 // Update provider UI across all dropdowns
 function updateProviderUI(provider) {
-  const providerLabel = provider === 'claude' ? 'Claude' : 'Opencode';
+  const providerLabel = provider === 'claude' ? 'Claude' : provider === 'groq' ? 'Groq' : 'Opencode';
   document.querySelectorAll('.provider-selector .provider-label').forEach(l => {
     l.textContent = providerLabel;
   });
